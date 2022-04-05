@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -13,14 +14,19 @@ const UserReposPage: NextPage = () => {
   const { username } = router.query;
 
   return (
-    <Paper sx={{ maxWidth: "100vw", height: "100vh" }} square>
-      <Stack gap="1em">
-        <Header username={username as string} />
-        <Box sx={{ width: "50vw", margin: "auto" }}>
-          <RepoList username={(username as string) ?? ""} />
-        </Box>
-      </Stack>
-    </Paper>
+    <>
+      <Head>
+        <title>GitHub: {username}</title>
+      </Head>
+      <Paper sx={{ maxWidth: "100vw", height: "100vh" }} square>
+        <Stack gap="1em">
+          <Header username={username as string} />
+          <Box sx={{ width: "50vw", mx: "auto", mt: "2em" }}>
+            <RepoList username={(username as string) ?? ""} />
+          </Box>
+        </Stack>
+      </Paper>
+    </>
   );
 };
 

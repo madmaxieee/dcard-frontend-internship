@@ -43,7 +43,7 @@ export const useRepository = (username: string, reponame: string) => {
 
     setRepoInfo({
       full_name: data.full_name,
-      description: data?.description ?? "this repository has no description",
+      description: data?.description ?? "(this repository has no description)",
       stargazers_count: data.stargazers_count,
       html_url: data.html_url,
       visibility: data.visibility,

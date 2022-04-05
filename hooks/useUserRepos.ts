@@ -13,7 +13,6 @@ export const useUserRepos = (username: string) => {
     let res: Response;
     try {
       res = await fetch(`https://api.github.com/users/${username}/repos`);
-      console.log("🚀 ~ file: useUserRepos.ts ~ line 16 ~ useUserRepos ~ username", username)
     } catch (err) {
       notification.error("network error");
       router.push("/");
@@ -27,8 +26,7 @@ export const useUserRepos = (username: string) => {
     }
 
     const data = await res.json();
-    console.log("🚀 ~ file: useUserRepos.ts ~ line 29 ~ useUserRepos ~ data", data)
-    
+
     if (data.length === 0) {
       notification.error(`user "${username}" not found`);
       router.push("/");
