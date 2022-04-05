@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+import { notification } from "utils";
+
 import { RepoInfo } from "types";
 
 export const useRepository = (username: string, reponame: string) => {
@@ -11,12 +15,31 @@ export const useRepository = (username: string, reponame: string) => {
     visibility: "",
   });
 
+  const router = useRouter();
+
   const fetchData: () => Promise<any> = async () => {
-    const res = await fetch(
-      `https://api.github.com/repos/${username}/${reponame}`
-    );
+    let res: Response;
+    try {
+      res = await fetch(`https://api.github.com/repos/${username}/${reponame}`);
+    } catch (err) {
+      notification.error("network error");
+      router.push("/");
+      return;
+    }
+
+    if (!res.ok) {
+      notification.error(`Error ${res.status}`);
+      router.push("/");
+      return;
+    }
 
     const data = await res.json();
+
+    if (data.message === "Not Found") {
+      notification.error(`repo "${username}/${reponame}" not found`);
+      router.push("/");
+      return;
+    }
 
     setRepoInfo({
       full_name: data.full_name,

@@ -17,7 +17,7 @@ const UserReposPage: NextPage = () => {
       <Stack gap="1em">
         <Header username={username as string} />
         <Box sx={{ width: "50vw", margin: "auto" }}>
-          <RepoList username={username as string} />
+          <RepoList username={(username as string) ?? ""} />
         </Box>
       </Stack>
     </Paper>

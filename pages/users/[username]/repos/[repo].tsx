@@ -10,7 +10,7 @@ const RepoPage: NextPage = () => {
   const { username, repo } = router.query;
 
   return (
-    <Paper sx={{ maxWidth: "100vw", height: "98vh" }} square>
+    <Paper sx={{ maxWidth: "100vw", height: "100vh" }} square>
       <Stack gap="1em">
         <Header username={username as string} repoName={repo as string} />
         <Box sx={{ width: "50vw", margin: "auto" }}>

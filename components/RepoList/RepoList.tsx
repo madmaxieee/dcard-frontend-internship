@@ -8,14 +8,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
 
 import { RowSkeleton } from "./RowSkeleton";
 import { NavLink } from "components";
 
+import { useUserRepos } from "hooks";
+
 import { v4 as uuid } from "uuid";
 
-import { useUserRepos } from "hooks";
+import { parseStarCount } from "utils";
 
 export const RepoList: FC<{ username: string }> = ({ username }) => {
   const tableRef = useRef<HTMLDivElement>(null);
@@ -57,7 +58,6 @@ export const RepoList: FC<{ username: string }> = ({ username }) => {
         loadMore(currentRange);
       }
     }
-    console.log("scroll!");
   }, [hasMore, loadMore, loading, currentRange, distanceBottom]);
 
   useEffect(() => {
@@ -101,7 +101,7 @@ export const RepoList: FC<{ username: string }> = ({ username }) => {
                     </NavLink>
                   </TableCell>
                   <TableCell>
-                    <Box width="5em">⭐ {stargazers_count}</Box>
+                    <Box width="5em">{parseStarCount(stargazers_count)}</Box>
                   </TableCell>
                   <TableCell>{description}</TableCell>
                 </TableRow>
