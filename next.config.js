@@ -1,5 +1,3 @@
-const config = require("./config/index.ts");
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -7,7 +5,8 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: `/users/${config.username}/repos`,
+        destination: `/users/zhuang-jia-xu/repos`,
+        // destination: `/users/facebook/repos`,
         permanent: false,
       },
     ];

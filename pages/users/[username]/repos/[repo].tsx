@@ -1,18 +1,26 @@
 import type { NextPage } from "next";
 
 import { useRouter } from "next/router";
-import { Header } from "components";
+
+import { Paper, Stack, Box } from "@mui/material";
+import { Header, RepoPageContent } from "components";
 
 const RepoPage: NextPage = () => {
   const router = useRouter();
   const { username, repo } = router.query;
 
   return (
-    <>
-      <Header />
-      <p>username: {username}</p>
-      <p>repo: {repo}</p>
-    </>
+    <Paper sx={{ maxWidth: "100vw", height: "98vh" }} square>
+      <Stack gap="1em">
+        <Header username={username as string} repoName={repo as string} />
+        <Box sx={{ width: "50vw", margin: "auto" }}>
+          <RepoPageContent
+            username={username as string}
+            repoName={repo as string}
+          />
+        </Box>
+      </Stack>
+    </Paper>
   );
 };
 
