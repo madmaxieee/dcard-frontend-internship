@@ -3,6 +3,8 @@ export type RepoInfo = {
   full_name?: string;
   description: string;
   stargazers_count: number;
-  html_url: string;
-  visibility: string;
+  html_url: URL;
+  visibility: "public" | "private" | "";
 };
+
+export type URL = string;

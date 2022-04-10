@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useRouter } from "next/router";
+import { useRouter } from "hooks";
 
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
@@ -9,13 +9,11 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
 export const SearchBox = () => {
-  const router = useRouter();
+  const { navigate } = useRouter();
 
   const [username, setUserName] = useState<string>("");
 
-  const handleSearch = () => {
-    router.push(`/users/${username}/repos`);
-  };
+  const handleSearch = () => navigate(`/users/${username}/repos`);
 
   return (
     <Paper

@@ -1,9 +1,11 @@
 import type { FC } from "react";
 
+import { useRouter } from "hooks";
+
 import AppBar from "@mui/material/AppBar";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 
-import { Box, Stack, Toolbar, IconButton } from "@mui/material";
+import { Stack, Toolbar, IconButton } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { NavLink } from "../NavLink";
 import { SearchBox } from "./SearchBox";
@@ -12,6 +14,7 @@ export const Header: FC<{ username: string; repoName?: string }> = ({
   username,
   repoName,
 }) => {
+  const { navigate } = useRouter();
   return (
     <AppBar position="static" color="transparent" sx={{ maxWidth: "100vw" }}>
       <Toolbar sx={{ minHeight: "6vh", width: "60vw", mx: "auto" }}>
@@ -22,7 +25,11 @@ export const Header: FC<{ username: string; repoName?: string }> = ({
           sx={{ width: "100%" }}
         >
           <Stack direction="row" gap="1em" alignItems="center">
-            <IconButton onClick={()=>{}}>
+            <IconButton
+              onClick={() => {
+                navigate("/");
+              }}
+            >
               <HomeIcon />
             </IconButton>
             <Breadcrumbs aria-label="breadcrumb">

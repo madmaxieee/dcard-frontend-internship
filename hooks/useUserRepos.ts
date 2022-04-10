@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
+import { useRouter } from "hooks";
 
 import { notification } from "utils";
 
 import type { RepoInfo } from "types";
 
 export const useUserRepos = (username: string) => {
-  const router = useRouter();
+  const { navigate } = useRouter();
 
   const getRepos: (range: [number, number]) => Promise<RepoInfo[]> = async (
     range: [number, number]
@@ -15,13 +15,13 @@ export const useUserRepos = (username: string) => {
       res = await fetch(`https://api.github.com/users/${username}/repos`);
     } catch (err) {
       notification.error("network error");
-      router.push("/");
+      navigate("/");
       return [];
     }
 
     if (!res.ok) {
       notification.error(`Error ${res.status}`);
-      router.push("/");
+      navigate("/");
       return [];
     }
 
@@ -29,7 +29,7 @@ export const useUserRepos = (username: string) => {
 
     if (data.length === 0) {
       notification.error(`user "${username}" not found`);
-      router.push("/");
+      navigate("/");
       return [];
     }
 

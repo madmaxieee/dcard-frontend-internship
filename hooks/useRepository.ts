@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "hooks";
 
 import { notification } from "utils";
 
@@ -15,7 +15,7 @@ export const useRepository = (username: string, reponame: string) => {
     visibility: "",
   });
 
-  const router = useRouter();
+  const { navigate } = useRouter();
 
   const fetchData: () => Promise<any> = async () => {
     let res: Response;
@@ -23,13 +23,13 @@ export const useRepository = (username: string, reponame: string) => {
       res = await fetch(`https://api.github.com/repos/${username}/${reponame}`);
     } catch (err) {
       notification.error("network error");
-      router.push("/");
+      navigate("/");
       return;
     }
 
     if (!res.ok) {
       notification.error(`Error ${res.status}`);
-      router.push("/");
+      navigate("/");
       return;
     }
 
@@ -37,7 +37,7 @@ export const useRepository = (username: string, reponame: string) => {
 
     if (data.message === "Not Found") {
       notification.error(`repo "${username}/${reponame}" not found`);
-      router.push("/");
+      navigate("/");
       return;
     }
 
