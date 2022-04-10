@@ -3,9 +3,10 @@ import type { FC } from "react";
 import AppBar from "@mui/material/AppBar";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 
+import { Box, Stack, Toolbar, IconButton } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
 import { NavLink } from "../NavLink";
 import { SearchBox } from "./SearchBox";
-import { Box, Stack, Toolbar } from "@mui/material";
 
 export const Header: FC<{ username: string; repoName?: string }> = ({
   username,
@@ -20,14 +21,19 @@ export const Header: FC<{ username: string; repoName?: string }> = ({
           alignItems="center"
           sx={{ width: "100%" }}
         >
-          <Breadcrumbs aria-label="breadcrumb">
-            <NavLink href={`/users/${username}/repos`}>{username}</NavLink>
-            {repoName && (
-              <NavLink href={`/users/${username}/repos/${repoName}`}>
-                {repoName}
-              </NavLink>
-            )}
-          </Breadcrumbs>
+          <Stack direction="row" gap="1em" alignItems="center">
+            <IconButton onClick={()=>{}}>
+              <HomeIcon />
+            </IconButton>
+            <Breadcrumbs aria-label="breadcrumb">
+              <NavLink href={`/users/${username}/repos`}>{username}</NavLink>
+              {repoName && (
+                <NavLink href={`/users/${username}/repos/${repoName}`}>
+                  {repoName}
+                </NavLink>
+              )}
+            </Breadcrumbs>
+          </Stack>
           <SearchBox />
         </Stack>
       </Toolbar>
